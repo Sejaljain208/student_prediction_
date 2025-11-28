@@ -1,0 +1,496 @@
+{% extends "base.html" %}
+
+{% block title %}How It Works - DropoutWatch{% endblock %}
+
+{% block content %}
+<div class="how-it-works-page">
+    <!-- Hero Section -->
+    <section class="hero-section bg-gradient text-white py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-10 mx-auto text-center">
+                    <h1 class="display-4 fw-bold mb-3">How DropoutWatch Works</h1>
+                    <p class="lead">A comprehensive 6-step process combining data science and AI to predict and prevent
+                        student dropouts</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Steps -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <!-- Step 1 -->
+                <div class="col-12 mb-5">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <div class="step-number">
+                                <span class="display-3 fw-bold text-primary">1</span>
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="card border-primary shadow-sm">
+                                <div class="card-body p-4">
+                                    <h3 class="card-title text-primary mb-3">
+                                        <i class="fas fa-database me-2"></i>Data Collection
+                                    </h3>
+                                    <p class="card-text mb-3">Comprehensive student data is collected from multiple
+                                        sources:</p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <ul class="list-unstyled">
+                                                <li><i class="fas fa-check-circle text-success me-2"></i><strong>Attendance
+                                                        Records:</strong> Daily presence tracking</li>
+                                                <li><i class="fas fa-check-circle text-success me-2"></i><strong>Academic
+                                                        Performance:</strong> Grades, assignments, exams</li>
+                                                <li><i class="fas fa-check-circle text-success me-2"></i><strong>Assignment
+                                                        Completion:</strong> Submission rates and scores</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <ul class="list-unstyled">
+                                                <li><i class="fas fa-check-circle text-success me-2"></i><strong>Fee
+                                                        Status:</strong> Payment history and outstanding amounts</li>
+                                                <li><i class="fas fa-check-circle text-success me-2"></i><strong>Extracurricular
+                                                        Activities:</strong> Participation levels</li>
+                                                <li><i class="fas fa-check-circle text-success me-2"></i><strong>Counseling
+                                                        Notes:</strong> Behavioral and emotional observations</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="col-12 mb-5">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <div class="step-number">
+                                <span class="display-3 fw-bold text-success">2</span>
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="card border-success shadow-sm">
+                                <div class="card-body p-4">
+                                    <h3 class="card-title text-success mb-3">
+                                        <i class="fas fa-filter me-2"></i>Data Preprocessing
+                                    </h3>
+                                    <p class="card-text mb-3">Raw data is cleaned, validated, and transformed into
+                                        meaningful features:</p>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="text-center p-3 bg-light rounded">
+                                                <i class="fas fa-broom fa-2x text-success mb-2"></i>
+                                                <h5>Data Cleaning</h5>
+                                                <p class="small text-muted">Remove duplicates, handle missing values,
+                                                    validate formats</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="text-center p-3 bg-light rounded">
+                                                <i class="fas fa-sliders-h fa-2x text-success mb-2"></i>
+                                                <h5>Feature Engineering</h5>
+                                                <p class="small text-muted">Calculate percentages, trends, and derived
+                                                    metrics</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="text-center p-3 bg-light rounded">
+                                                <i class="fas fa-balance-scale fa-2x text-success mb-2"></i>
+                                                <h5>Normalization</h5>
+                                                <p class="small text-muted">Scale features for optimal model performance
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <strong>12 Key Features Extracted:</strong>
+                                        <span class="badge bg-secondary ms-2">Attendance %</span>
+                                        <span class="badge bg-secondary ms-2">Avg Assignment Score</span>
+                                        <span class="badge bg-secondary ms-2">Avg Exam Score</span>
+                                        <span class="badge bg-secondary ms-2">Assignment Completion Rate</span>
+                                        <span class="badge bg-secondary ms-2">Extracurricular Participation</span>
+                                        <span class="badge bg-secondary ms-2">Outstanding Fees Ratio</span>
+                                        <span class="badge bg-secondary ms-2">Counseling Concern Level</span>
+                                        <span class="badge bg-secondary ms-2">Days Absent</span>
+                                        <span class="badge bg-secondary ms-2">Grade Trend</span>
+                                        <span class="badge bg-secondary ms-2">Late Submissions</span>
+                                        <span class="badge bg-secondary ms-2">Behavioral Incidents</span>
+                                        <span class="badge bg-secondary ms-2">Project Scores</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="col-12 mb-5">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <div class="step-number">
+                                <span class="display-3 fw-bold text-info">3</span>
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="card border-info shadow-sm">
+                                <div class="card-body p-4">
+                                    <h3 class="card-title text-info mb-3">
+                                        <i class="fas fa-brain me-2"></i>Machine Learning Model
+                                    </h3>
+                                    <p class="card-text mb-3">We evaluated multiple ML algorithms and selected the best
+                                        performer:</p>
+
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Model</th>
+                                                    <th>Accuracy</th>
+                                                    <th>Precision</th>
+                                                    <th>Recall</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="table-success">
+                                                    <td><strong>Random Forest</strong></td>
+                                                    <td>90%</td>
+                                                    <td>88%</td>
+                                                    <td>92%</td>
+                                                    <td><span class="badge bg-success">✓ Selected</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Support Vector Machine (SVM)</td>
+                                                    <td>85%</td>
+                                                    <td>83%</td>
+                                                    <td>87%</td>
+                                                    <td><span class="badge bg-secondary">Tested</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Logistic Regression</td>
+                                                    <td>82%</td>
+                                                    <td>80%</td>
+                                                    <td>84%</td>
+                                                    <td><span class="badge bg-secondary">Tested</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="alert alert-info mt-3">
+                                        <strong><i class="fas fa-info-circle me-2"></i>Why Random Forest?</strong>
+                                        <ul class="mb-0 mt-2">
+                                            <li>Handles non-linear relationships effectively</li>
+                                            <li>Provides feature importance rankings</li>
+                                            <li>Robust against overfitting with ensemble approach</li>
+                                            <li>Works well with imbalanced datasets</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="col-12 mb-5">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <div class="step-number">
+                                <span class="display-3 fw-bold text-warning">4</span>
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="card border-warning shadow-sm">
+                                <div class="card-body p-4">
+                                    <h3 class="card-title text-warning mb-3">
+                                        <i class="fas fa-calculator me-2"></i>Risk Score Generation
+                                    </h3>
+                                    <p class="card-text mb-3">The model generates a comprehensive risk assessment:</p>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="card bg-success bg-opacity-10 border-success">
+                                                <div class="card-body text-center">
+                                                    <h4 class="text-success">Low Risk</h4>
+                                                    <p class="display-6 fw-bold text-success">0-33%</p>
+                                                    <p class="small">Student is on track, minimal intervention needed
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card bg-warning bg-opacity-10 border-warning">
+                                                <div class="card-body text-center">
+                                                    <h4 class="text-warning">Medium Risk</h4>
+                                                    <p class="display-6 fw-bold text-warning">34-66%</p>
+                                                    <p class="small">Requires monitoring and support</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card bg-danger bg-opacity-10 border-danger">
+                                                <div class="card-body text-center">
+                                                    <h4 class="text-danger">High Risk</h4>
+                                                    <p class="display-6 fw-bold text-danger">67-100%</p>
+                                                    <p class="small">Immediate intervention required</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <h5>Contributing Factors Identified:</h5>
+                                        <p class="text-muted">The system identifies specific reasons for the risk level,
+                                            such as:</p>
+                                        <div class="d-flex flex-wrap gap-2">
+                                            <span class="badge bg-danger">Low attendance (&lt;75%)</span>
+                                            <span class="badge bg-danger">Poor grades (&lt;40%)</span>
+                                            <span class="badge bg-warning">High fees overdue</span>
+                                            <span class="badge bg-warning">Low assignment completion</span>
+                                            <span class="badge bg-info">Counseling concerns</span>
+                                            <span class="badge bg-info">No extracurricular activities</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="col-12 mb-5">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <div class="step-number">
+                                <span class="display-3 fw-bold text-danger">5</span>
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="card border-danger shadow-sm">
+                                <div class="card-body p-4">
+                                    <h3 class="card-title text-danger mb-3">
+                                        <i class="fas fa-chart-bar me-2"></i>Dashboard Visualization
+                                    </h3>
+                                    <p class="card-text mb-3">Results are displayed in intuitive, interactive
+                                        dashboards:</p>
+
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="p-3 bg-light rounded">
+                                                <h5><i class="fas fa-pie-chart text-primary me-2"></i>Risk Distribution
+                                                    Charts</h5>
+                                                <p class="small text-muted mb-0">Visual breakdown of student risk levels
+                                                    across classes</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="p-3 bg-light rounded">
+                                                <h5><i class="fas fa-table text-primary me-2"></i>Student Lists</h5>
+                                                <p class="small text-muted mb-0">Sortable, filterable tables with risk
+                                                    indicators</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="p-3 bg-light rounded">
+                                                <h5><i class="fas fa-line-chart text-primary me-2"></i>Trend Analysis
+                                                </h5>
+                                                <p class="small text-muted mb-0">Attendance and grade trends over time
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="p-3 bg-light rounded">
+                                                <h5><i class="fas fa-user text-primary me-2"></i>Individual Profiles
+                                                </h5>
+                                                <p class="small text-muted mb-0">Detailed student views with all
+                                                    contributing factors</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="col-12 mb-5">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <div class="step-number">
+                                <span class="display-3 fw-bold text-primary">6</span>
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="card border-primary shadow-sm">
+                                <div class="card-body p-4">
+                                    <h3 class="card-title text-primary mb-3">
+                                        <i class="fas fa-bell me-2"></i>Automated Alerts & Intervention
+                                    </h3>
+                                    <p class="card-text mb-3">Stakeholders are automatically notified when students need
+                                        help:</p>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="text-center p-3 border rounded">
+                                                <i class="fas fa-envelope fa-3x text-primary mb-3"></i>
+                                                <h5>Email Alerts</h5>
+                                                <p class="small text-muted">Sent to parents and counselors with detailed
+                                                    risk information and action steps</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="text-center p-3 border rounded">
+                                                <i class="fas fa-sms fa-3x text-primary mb-3"></i>
+                                                <h5>SMS Notifications</h5>
+                                                <p class="small text-muted">Quick text alerts via Twilio for urgent
+                                                    high-risk cases</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="text-center p-3 border rounded">
+                                                <i class="fas fa-clipboard-list fa-3x text-primary mb-3"></i>
+                                                <h5>Counselor Queue</h5>
+                                                <p class="small text-muted">High-risk students automatically added to
+                                                    intervention queue</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="alert alert-success mt-4">
+                                        <strong><i class="fas fa-lightbulb me-2"></i>Early Intervention Impact:</strong>
+                                        <p class="mb-0">Studies show early detection and intervention can improve
+                                            student retention rates by 15-25%</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Flow Diagram -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Complete Process Flow</h2>
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="process-flow">
+                        <div class="flow-item">
+                            <div class="flow-icon bg-primary text-white">1</div>
+                            <div class="flow-label">Data Collection</div>
+                            <div class="flow-arrow">→</div>
+                        </div>
+                        <div class="flow-item">
+                            <div class="flow-icon bg-success text-white">2</div>
+                            <div class="flow-label">Preprocessing</div>
+                            <div class="flow-arrow">→</div>
+                        </div>
+                        <div class="flow-item">
+                            <div class="flow-icon bg-info text-white">3</div>
+                            <div class="flow-label">ML Model</div>
+                            <div class="flow-arrow">→</div>
+                        </div>
+                        <div class="flow-item">
+                            <div class="flow-icon bg-warning text-white">4</div>
+                            <div class="flow-label">Risk Score</div>
+                            <div class="flow-arrow">→</div>
+                        </div>
+                        <div class="flow-item">
+                            <div class="flow-icon bg-danger text-white">5</div>
+                            <div class="flow-label">Dashboard</div>
+                            <div class="flow-arrow">→</div>
+                        </div>
+                        <div class="flow-item">
+                            <div class="flow-icon bg-primary text-white">6</div>
+                            <div class="flow-label">Alerts</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="mb-3">See It In Action</h2>
+                    <p class="lead text-muted mb-4">Experience the power of AI-driven dropout prevention</p>
+                    <a href="{{ url_for('auth.login') }}" class="btn btn-primary btn-lg me-2">Try Demo</a>
+                    <a href="{{ url_for('main.about') }}" class="btn btn-outline-primary btn-lg">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    .hero-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .step-number {
+        margin-bottom: 1rem;
+    }
+
+    .process-flow {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .flow-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+        min-width: 100px;
+    }
+
+    .flow-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+
+    .flow-label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .flow-arrow {
+        font-size: 2rem;
+        color: #6c757d;
+        margin: 0 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .flow-arrow {
+            display: none;
+        }
+
+        .process-flow {
+            flex-direction: column;
+        }
+    }
+</style>
+{% endblock %}

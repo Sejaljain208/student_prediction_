@@ -1,0 +1,11 @@
+student_id,name,grade,section,email,phone,age,gender,attendance_rate,gpa,parent_education,family_income,study_hours_per_week,extracurricular_activities,previous_failures
+STU101,Alice Johnson,9,A,alice.j@school.edu,555-0101,14,F,0.92,3.5,Bachelor,Medium,18,2,0
+STU102,Bob Martinez,9,A,bob.m@school.edu,555-0102,15,M,0.85,3.0,High School,Low,15,1,0
+STU103,Carol Davis,10,B,carol.d@school.edu,555-0103,16,F,0.78,2.8,High School,Low,12,0,1
+STU104,David Lee,10,B,david.l@school.edu,555-0104,15,M,0.95,3.9,Master,High,22,3,0
+STU105,Emma Wilson,11,C,emma.w@school.edu,555-0105,17,F,0.88,3.3,Bachelor,Medium,16,2,0
+STU106,Frank Brown,11,C,frank.b@school.edu,555-0106,16,M,0.72,2.4,No Formal,Low,10,0,2
+STU107,Grace Taylor,12,A,grace.t@school.edu,555-0107,18,F,0.90,3.6,Master,High,20,2,0
+STU108,Henry Anderson,12,A,henry.a@school.edu,555-0108,17,M,0.68,2.1,High School,Low,8,0,3
+STU109,Iris Thomas,9,B,iris.t@school.edu,555-0109,14,F,0.94,3.7,Bachelor,Medium,19,2,0
+STU110,Jack White,10,C,jack.w@school.edu,555-0110,16,M,0.80,2.9,High School,Medium,14,1,1

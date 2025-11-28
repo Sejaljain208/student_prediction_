@@ -1,0 +1,385 @@
+{% extends "base.html" %}
+
+{% block title %}Teacher Dashboard - DropoutWatch{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4 fade-in">
+        <div>
+            <h2 class="fw-bold mb-1">Teacher Dashboard</h2>
+            <p class="text-muted mb-0">Monitor student risk levels and performance</p>
+        </div>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#batchPredictModal">
+            <i class="fas fa-sync-alt me-2"></i>Run Batch Prediction
+        </button>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="row mb-4 fade-in" style="animation-delay: 0.1s;">
+        <div class="col-md-3 mb-3 mb-md-0">
+            <div class="card summary-card bg-gradient-primary h-100">
+                <div class="card-body">
+                    <h6 class="text-white-50 text-uppercase mb-2">Total Students</h6>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h2 class="mb-0 fw-bold">{{ total_students }}</h2>
+                        <i class="fas fa-users fa-2x text-white-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3 mb-md-0">
+            <div class="card summary-card bg-gradient-success h-100">
+                <div class="card-body">
+                    <h6 class="text-white-50 text-uppercase mb-2">Low Risk</h6>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h2 class="mb-0 fw-bold">{{ risk_stats.low }}</h2>
+                        <i class="fas fa-check-circle fa-2x text-white-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3 mb-md-0">
+            <div class="card summary-card bg-gradient-warning h-100">
+                <div class="card-body">
+                    <h6 class="text-white-50 text-uppercase mb-2">Medium Risk</h6>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h2 class="mb-0 fw-bold">{{ risk_stats.medium }}</h2>
+                        <i class="fas fa-exclamation-triangle fa-2x text-white-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3 mb-md-0">
+            <div class="card summary-card bg-gradient-danger h-100">
+                <div class="card-body">
+                    <h6 class="text-white-50 text-uppercase mb-2">High Risk</h6>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h2 class="mb-0 fw-bold">{{ risk_stats.high }}</h2>
+                        <i class="fas fa-exclamation-circle fa-2x text-white-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="row mb-4 fade-in" style="animation-delay: 0.2s;">
+        <div class="col-md-6 mb-4 mb-md-0">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Risk Distribution</h5>
+                    <span class="badge bg-light text-dark">Real-time</span>
+                </div>
+                <div class="card-body">
+                    <canvas id="riskPieChart" height="250"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Risk by Grade Level</h5>
+                    <span class="badge bg-light text-dark">Analysis</span>
+                </div>
+                <div class="card-body">
+                    <canvas id="riskBarChart" height="250"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Table -->
+    <div class="card fade-in" style="animation-delay: 0.3s;">
+        <div class="card-header bg-white py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="fas fa-table me-2 text-primary"></i>Student Risk Assessment (Alphabetical
+                    Order)</h5>
+                <div class="input-group w-auto">
+                    <span class="input-group-text bg-light border-end-0"><i class="fas fa-search text-muted"></i></span>
+                    <input type="text" class="form-control border-start-0 ps-0" placeholder="Search students..."
+                        id="studentSearch">
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0" id="studentTable">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="ps-4">Student</th>
+                            <th>Grade/Section</th>
+                            <th>Attendance</th>
+                            <th>Avg. Marks</th>
+                            <th>Risk Status</th>
+                            <th>Risk Score</th>
+                            <th class="text-end pe-4">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in student_data %}
+                        <tr class="cursor-pointer" data-bs-toggle="collapse" data-bs-target="#details-{{ loop.index }}"
+                            style="cursor: pointer;">
+                            <td class="ps-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar-circle me-3 bg-light text-primary fw-bold">
+                                        {{ item.student.name[0] }}
+                                    </div>
+                                    <div>
+                                        <div class="fw-bold">{{ item.student.name }}</div>
+                                        <div class="small text-muted">{{ item.student.student_id }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge bg-light text-dark border">Grade {{ item.student.grade }} - {{
+                                    item.student.section }}</span>
+                            </td>
+                            <td>
+                                {% set att_pct = item.attendance.percentage %}
+                                <span
+                                    class="badge {% if att_pct >= 90 %}bg-success{% elif att_pct >= 75 %}bg-warning{% else %}bg-danger{% endif %}">
+                                    {{ att_pct }}%
+                                </span>
+                                <small class="text-muted d-block">{{ item.attendance.present_days }}/{{
+                                    item.attendance.total_days }} days</small>
+                            </td>
+                            <td>
+                                {% if item.grades.overall_average > 0 %}
+                                <div class="d-flex align-items-center">
+                                    <div class="progress flex-grow-1 me-2" style="height: 6px; width: 60px;">
+                                        <div class="progress-bar {% if item.grades.overall_average >= 75 %}bg-success{% elif item.grades.overall_average >= 50 %}bg-warning{% else %}bg-danger{% endif %}"
+                                            role="progressbar" style="width: {{ item.grades.overall_average }}%">
+                                        </div>
+                                    </div>
+                                    <span class="small fw-bold">{{ item.grades.overall_average }}%</span>
+                                </div>
+                                {% else %}
+                                <span class="text-muted">No data</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if item.prediction %}
+                                {% if item.prediction.risk_level == 'high' %}
+                                <span class="badge bg-danger"><i class="fas fa-circle me-1 small"></i>High Risk</span>
+                                {% elif item.prediction.risk_level == 'medium' %}
+                                <span class="badge bg-warning"><i class="fas fa-circle me-1 small"></i>Medium
+                                    Risk</span>
+                                {% else %}
+                                <span class="badge bg-success"><i class="fas fa-circle me-1 small"></i>Low Risk</span>
+                                {% endif %}
+                                {% else %}
+                                <span class="badge bg-secondary">Pending</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if item.prediction %}
+                                <div class="d-flex align-items-center">
+                                    <div class="progress flex-grow-1 me-2" style="height: 6px; width: 60px;">
+                                        <div class="progress-bar {% if item.prediction.risk_score > 0.6 %}bg-danger{% elif item.prediction.risk_score > 0.3 %}bg-warning{% else %}bg-success{% endif %}"
+                                            role="progressbar" style="width: {{ item.prediction.risk_score * 100 }}%">
+                                        </div>
+                                    </div>
+                                    <span class="small fw-bold">{{ "%.0f"|format(item.prediction.risk_score * 100)
+                                        }}%</span>
+                                </div>
+                                {% else %}
+                                <span class="text-muted">-</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-end pe-4">
+                                <a href="{{ url_for('dashboard.student_detail', student_id=item.student.id) }}"
+                                    class="btn btn-sm btn-outline-primary me-1" title="View Full Details">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <button class="btn btn-sm btn-outline-info"
+                                    onclick="event.stopPropagation(); predictStudent({{ item.student.id }})"
+                                    title="Update Prediction">
+                                    <i class="fas fa-sync-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <!-- Expandable Details Row -->
+                        <tr>
+                            <td colspan="7" class="p-0 border-0">
+                                <div class="collapse" id="details-{{ loop.index }}">
+                                    <div class="card card-body bg-light m-2">
+                                        <div class="row">
+                                            <!-- Attendance Details -->
+                                            <div class="col-md-6 mb-3">
+                                                <h6 class="fw-bold mb-3"><i
+                                                        class="fas fa-calendar-check me-2 text-primary"></i>Recent
+                                                    Attendance</h6>
+                                                {% if item.attendance.recent_records %}
+                                                <div class="table-responsive">
+                                                    <table class="table table-sm table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Date</th>
+                                                                <th>Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for record in item.attendance.recent_records[:5] %}
+                                                            <tr>
+                                                                <td>{{ record.date.strftime('%Y-%m-%d') }}</td>
+                                                                <td>
+                                                                    <span
+                                                                        class="badge {% if record.status == 'present' %}bg-success{% elif record.status == 'late' %}bg-warning{% else %}bg-danger{% endif %}">
+                                                                        {{ record.status.capitalize() }}
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                {% else %}
+                                                <p class="text-muted">No attendance records available</p>
+                                                {% endif %}
+                                            </div>
+
+                                            <!-- Grades Details -->
+                                            <div class="col-md-6 mb-3">
+                                                <h6 class="fw-bold mb-3"><i
+                                                        class="fas fa-graduation-cap me-2 text-primary"></i>Subject-wise
+                                                    Performance</h6>
+                                                {% if item.grades.by_subject %}
+                                                <div class="table-responsive">
+                                                    <table class="table table-sm table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Subject</th>
+                                                                <th>Average</th>
+                                                                <th>Assessments</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for subject, stats in item.grades.by_subject.items() %}
+                                                            <tr>
+                                                                <td>{{ subject }}</td>
+                                                                <td>
+                                                                    <span
+                                                                        class="badge {% if stats.average >= 75 %}bg-success{% elif stats.average >= 50 %}bg-warning{% else %}bg-danger{% endif %}">
+                                                                        {{ stats.average }}%
+                                                                    </span>
+                                                                </td>
+                                                                <td>{{ stats.count }}</td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                {% else %}
+                                                <p class="text-muted">No grade records available</p>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+
+                                        <!-- Risk Factors -->
+                                        {% if item.prediction and item.prediction.contributing_factors %}
+                                        <div class="mt-2">
+                                            <h6 class="fw-bold mb-2"><i
+                                                    class="fas fa-exclamation-triangle me-2 text-warning"></i>Risk
+                                                Factors</h6>
+                                            <div class="d-flex flex-wrap gap-2">
+                                                {% for factor in item.prediction.contributing_factors %}
+                                                <span class="badge bg-warning text-dark">{{ factor }}</span>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Batch Prediction Modal -->
+<div class="modal fade" id="batchPredictModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Run Batch Prediction</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>This will analyze the latest data for all {{ total_students }} students and update their risk scores.
+                </p>
+                <p class="text-muted small"><i class="fas fa-info-circle me-1"></i> This process may take a few moments.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="runBatchPrediction()">Run Prediction</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function predictStudent(studentId) {
+        const btn = event.currentTarget;
+        const originalContent = btn.innerHTML;
+
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        btn.disabled = true;
+
+        fetch(`/api/predict/${studentId}`)
+            .then(response => response.json())
+            .then(data => {
+                const alertDiv = document.createElement('div');
+                alertDiv.className = `alert alert-${data.risk_level === 'high' ? 'danger' : data.risk_level === 'medium' ? 'warning' : 'success'} alert-dismissible fade show fixed-top m-3 shadow`;
+                alertDiv.style.zIndex = '1050';
+                alertDiv.innerHTML = `
+                    <strong>Prediction Updated!</strong> ${data.student_name} is now ${data.risk_level.toUpperCase()} risk.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+                document.body.appendChild(alertDiv);
+
+                setTimeout(() => {
+                    location.reload();
+                }, 1500);
+            })
+            .catch(error => {
+                alert('Error updating prediction');
+                console.error(error);
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+            });
+    }
+
+    function runBatchPrediction() {
+        const modal = bootstrap.Modal.getInstance(document.getElementById('batchPredictModal'));
+        modal.hide();
+
+        const overlay = document.createElement('div');
+        overlay.className = 'position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-white bg-opacity-75';
+        overlay.style.zIndex = '2000';
+        overlay.innerHTML = `
+            <div class="text-center">
+                <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;"></div>
+                <h5 class="fw-light">Analyzing student data...</h5>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+
+        fetch('/api/predict/batch', { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                location.reload();
+            })
+            .catch(error => {
+                document.body.removeChild(overlay);
+                alert('Error running batch prediction');
+                console.error(error);
+            });
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,254 @@
+{% extends "base.html" %}
+
+{% block title %}Features - DropoutWatch{% endblock %}
+
+{% block content %}
+<div class="features-page">
+    <!-- Hero Section -->
+    <section class="hero-section bg-primary text-white py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="display-4 fw-bold mb-3">Powerful Features for Student Success</h1>
+                    <p class="lead">Comprehensive tools to predict, prevent, and reduce student dropout rates using AI
+                        and data analytics</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Features -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Feature 1: Centralized Data -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 feature-card">
+                        <div class="card-body p-4">
+                            <div class="feature-icon bg-primary bg-opacity-10 rounded-circle p-3 mb-3 d-inline-block">
+                                <i class="fas fa-database fa-2x text-primary"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Centralized Student Data</h3>
+                            <p class="text-muted">All student information in one place:</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Attendance records</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Grades & assignments</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Exam scores & projects</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Fee payment status</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Counseling notes</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Extracurricular activities</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 2: AI Prediction -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 feature-card">
+                        <div class="card-body p-4">
+                            <div class="feature-icon bg-success bg-opacity-10 rounded-circle p-3 mb-3 d-inline-block">
+                                <i class="fas fa-brain fa-2x text-success"></i>
+                            </div>
+                            <h3 class="h4 mb-3">AI-Powered Risk Prediction</h3>
+                            <p class="text-muted">Advanced machine learning using Random Forest classifier:</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Analyzes 12+ student factors</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Predicts Low/Medium/High risk</li>
+                                <li><i class="fas fa-check text-success me-2"></i>90%+ accuracy rate</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Contributing factors analysis</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Real-time risk scoring</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Early intervention alerts</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 3: Teacher Dashboard -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 feature-card">
+                        <div class="card-body p-4">
+                            <div class="feature-icon bg-info bg-opacity-10 rounded-circle p-3 mb-3 d-inline-block">
+                                <i class="fas fa-chart-line fa-2x text-info"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Interactive Dashboards</h3>
+                            <p class="text-muted">Role-based dashboards for all stakeholders:</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Teacher dashboard with alerts</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Parent dashboard for children</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Counselor intervention tools</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Admin user management</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Real-time data updates</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Mobile-responsive design</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 4: Analytics -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 feature-card">
+                        <div class="card-body p-4">
+                            <div class="feature-icon bg-warning bg-opacity-10 rounded-circle p-3 mb-3 d-inline-block">
+                                <i class="fas fa-chart-pie fa-2x text-warning"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Advanced Analytics</h3>
+                            <p class="text-muted">Comprehensive data visualization:</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Risk distribution charts</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Attendance trend graphs</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Grade performance analysis</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Contributing factors breakdown</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Risk by grade level</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Exportable reports</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 5: Student Tracking -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 feature-card">
+                        <div class="card-body p-4">
+                            <div class="feature-icon bg-danger bg-opacity-10 rounded-circle p-3 mb-3 d-inline-block">
+                                <i class="fas fa-user-graduate fa-2x text-danger"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Student Profile Tracking</h3>
+                            <p class="text-muted">Detailed individual student monitoring:</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Complete academic history</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Attendance patterns</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Grade trends over time</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Behavioral observations</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Risk factor identification</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Intervention history</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 6: Batch Processing -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 feature-card">
+                        <div class="card-body p-4">
+                            <div class="feature-icon bg-secondary bg-opacity-10 rounded-circle p-3 mb-3 d-inline-block">
+                                <i class="fas fa-file-csv fa-2x text-secondary"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Batch CSV Upload</h3>
+                            <p class="text-muted">Efficient bulk data processing:</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Upload multiple students at once</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Automatic data validation</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Batch risk prediction</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Error handling & reporting</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Sample CSV templates</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Instant database updates</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 7: Alert System -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 feature-card">
+                        <div class="card-body p-4">
+                            <div class="feature-icon bg-primary bg-opacity-10 rounded-circle p-3 mb-3 d-inline-block">
+                                <i class="fas fa-bell fa-2x text-primary"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Automated Alert System</h3>
+                            <p class="text-muted">Multi-channel notifications:</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Email alerts to parents</li>
+                                <li><i class="fas fa-check text-success me-2"></i>SMS notifications (Twilio)</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Counselor notifications</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Automatic trigger on risk change</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Alert history logging</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Customizable alert rules</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 8: Security -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 feature-card">
+                        <div class="card-body p-4">
+                            <div class="feature-icon bg-success bg-opacity-10 rounded-circle p-3 mb-3 d-inline-block">
+                                <i class="fas fa-shield-alt fa-2x text-success"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Secure & Compliant</h3>
+                            <p class="text-muted">Enterprise-grade security:</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Password encryption (bcrypt)</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Role-based access control</li>
+                                <li><i class="fas fa-check text-success me-2"></i>CSRF protection</li>
+                                <li><i class="fas fa-check text-success me-2"></i>SQL injection prevention</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Session management</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Data privacy compliance</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 9: Reporting -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 feature-card">
+                        <div class="card-body p-4">
+                            <div class="feature-icon bg-info bg-opacity-10 rounded-circle p-3 mb-3 d-inline-block">
+                                <i class="fas fa-file-alt fa-2x text-info"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Comprehensive Reporting</h3>
+                            <p class="text-muted">Detailed insights and reports:</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Student risk reports</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Class performance summaries</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Intervention effectiveness</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Attendance reports</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Grade distribution analysis</li>
+                                <li><i class="fas fa-check text-success me-2"></i>PDF export capability</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="mb-3">Ready to Reduce Dropout Rates?</h2>
+                    <p class="lead text-muted mb-4">Join schools using DropoutWatch to improve student retention and
+                        success</p>
+                    <a href="{{ url_for('auth.login') }}" class="btn btn-primary btn-lg me-2">Get Started</a>
+                    <a href="{{ url_for('main.about') }}" class="btn btn-outline-primary btn-lg">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    .feature-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .feature-icon {
+        width: 70px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+</style>
+{% endblock %}

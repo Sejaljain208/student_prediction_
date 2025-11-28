@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Parent Dashboard - DropoutWatch{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2><i class="fas fa-child"></i> My Children</h2>
+    <p class="text-muted">Monitor your children's academic progress and risk status</p>
+
+    <div class="row">
+        {% for item in children_data %}
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4>{{ item.student.name }}</h4>
+                    <p class="mb-0">{{ item.student.student_id }} | Grade {{ item.student.grade }} - {{
+                        item.student.section }}</p>
+                </div>
+                <div class="card-body">
+                    {% if item.prediction %}
+                    <div class="mb-3">
+                        <h5>Risk Level:</h5>
+                        {% if item.prediction.risk_level == 'high' %}
+                        <h3><span class="badge bg-danger">HIGH RISK</span></h3>
+                        {% elif item.prediction.risk_level == 'medium' %}
+                        <h3><span class="badge bg-warning">MEDIUM RISK</span></h3>
+                        {% else %}
+                        <h3><span class="badge bg-success">LOW RISK</span></h3>
+                        {% endif %}
+                    </div>
+
+                    {% if item.prediction.contributing_factors %}
+                    <div class="alert alert-info">
+                        <h6>Areas of Concern:</h6>
+                        <ul class="mb-0">
+                            {% for factor in item.prediction.contributing_factors %}
+                            <li>{{ factor }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    {% else %}
+                    <p class="text-muted">No risk assessment available yet.</p>
+                    {% endif %}
+
+                    <a href="{{ url_for('dashboard.student_detail', student_id=item.student.id) }}"
+                        class="btn btn-primary">
+                        <i class="fas fa-eye"></i> View Full Details
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if not children_data %}
+        <div class="col-12">
+            <div class="alert alert-info">
+                <p class="mb-0">No children linked to your account. Please contact the school administrator.</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

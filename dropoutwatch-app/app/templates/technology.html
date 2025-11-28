@@ -1,0 +1,484 @@
+{% extends "base.html" %}
+
+{% block title %}Technology - DropoutWatch{% endblock %}
+
+{% block content %}
+<div class="technology-page">
+    <!-- Hero Section -->
+    <section class="hero-section bg-dark text-white py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-10 mx-auto text-center">
+                    <h1 class="display-4 fw-bold mb-3">Built with Modern Technology</h1>
+                    <p class="lead">Enterprise-grade stack powering intelligent dropout prevention</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Overview -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Technology Stack</h2>
+
+            <div class="row g-4">
+                <!-- Frontend -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm tech-card">
+                        <div class="card-body text-center">
+                            <div class="tech-icon mb-3">
+                                <i class="fab fa-html5 fa-4x text-danger"></i>
+                            </div>
+                            <h4>Frontend</h4>
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><strong>HTML5</strong></li>
+                                <li class="mb-2"><strong>CSS3</strong></li>
+                                <li class="mb-2"><strong>JavaScript (ES6+)</strong></li>
+                                <li class="mb-2"><strong>Bootstrap 5</strong></li>
+                                <li class="mb-2"><strong>Font Awesome</strong></li>
+                                <li class="mb-2"><strong>Jinja2 Templates</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backend -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm tech-card">
+                        <div class="card-body text-center">
+                            <div class="tech-icon mb-3">
+                                <i class="fab fa-python fa-4x text-primary"></i>
+                            </div>
+                            <h4>Backend</h4>
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><strong>Python 3.8+</strong></li>
+                                <li class="mb-2"><strong>Flask 3.0</strong></li>
+                                <li class="mb-2"><strong>Flask-Login</strong></li>
+                                <li class="mb-2"><strong>Flask-WTF</strong></li>
+                                <li class="mb-2"><strong>Flask-Mail</strong></li>
+                                <li class="mb-2"><strong>Flask-Bcrypt</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Machine Learning -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm tech-card">
+                        <div class="card-body text-center">
+                            <div class="tech-icon mb-3">
+                                <i class="fas fa-brain fa-4x text-success"></i>
+                            </div>
+                            <h4>Machine Learning</h4>
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><strong>scikit-learn</strong></li>
+                                <li class="mb-2"><strong>pandas</strong></li>
+                                <li class="mb-2"><strong>numpy</strong></li>
+                                <li class="mb-2"><strong>Random Forest</strong></li>
+                                <li class="mb-2"><strong>SVM</strong></li>
+                                <li class="mb-2"><strong>Logistic Regression</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Database & APIs -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm tech-card">
+                        <div class="card-body text-center">
+                            <div class="tech-icon mb-3">
+                                <i class="fas fa-database fa-4x text-warning"></i>
+                            </div>
+                            <h4>Database & APIs</h4>
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><strong>SQLite</strong></li>
+                                <li class="mb-2"><strong>SQLAlchemy ORM</strong></li>
+                                <li class="mb-2"><strong>Chart.js</strong></li>
+                                <li class="mb-2"><strong>Twilio SMS API</strong></li>
+                                <li class="mb-2"><strong>SMTP Email</strong></li>
+                                <li class="mb-2"><strong>RESTful APIs</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Machine Learning Features -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Machine Learning Features</h2>
+            <p class="text-center text-muted mb-5">Our Random Forest model analyzes 12 key student factors to predict
+                dropout risk</p>
+
+            <div class="row g-4">
+                <!-- Academic Performance -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">
+                                <i class="fas fa-graduation-cap me-2"></i>Academic Performance
+                            </h5>
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Assignment Performance:</strong> Average scores and completion rates
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Exam Results:</strong> Test scores and grade trends
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Project Scores:</strong> Quality and submission timeliness
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Result Points:</strong> Overall GPA and academic standing
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attendance & Engagement -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">
+                                <i class="fas fa-calendar-check me-2"></i>Attendance & Engagement
+                            </h5>
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Attendance Rate:</strong> Daily presence percentage
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Days Absent:</strong> Total absences and patterns
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Access Frequency:</strong> Platform login and engagement
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Late Submissions:</strong> Assignment punctuality tracking
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Behavioral & Financial -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-info">
+                                <i class="fas fa-user-friends me-2"></i>Behavioral & Financial
+                            </h5>
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Counseling Notes:</strong> Emotional and behavioral concerns
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Fees Due:</strong> Outstanding payment amounts
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Extracurricular Activities:</strong> Participation levels
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Behavioral Incidents:</strong> Disciplinary records
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ML Model Comparison -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Model Performance Comparison</h2>
+
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Algorithm</th>
+                                    <th>Training Accuracy</th>
+                                    <th>Test Accuracy</th>
+                                    <th>Cross-Validation</th>
+                                    <th>Precision</th>
+                                    <th>Recall</th>
+                                    <th>F1-Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-success">
+                                    <td><strong>Random Forest</strong> ✓</td>
+                                    <td>95%</td>
+                                    <td>90%</td>
+                                    <td>88% (±5%)</td>
+                                    <td>88%</td>
+                                    <td>92%</td>
+                                    <td>90%</td>
+                                </tr>
+                                <tr>
+                                    <td>Support Vector Machine</td>
+                                    <td>89%</td>
+                                    <td>85%</td>
+                                    <td>83% (±6%)</td>
+                                    <td>83%</td>
+                                    <td>87%</td>
+                                    <td>85%</td>
+                                </tr>
+                                <tr>
+                                    <td>Logistic Regression</td>
+                                    <td>85%</td>
+                                    <td>82%</td>
+                                    <td>80% (±7%)</td>
+                                    <td>80%</td>
+                                    <td>84%</td>
+                                    <td>82%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="alert alert-info mt-4">
+                        <h5><i class="fas fa-trophy me-2"></i>Why Random Forest Wins</h5>
+                        <ul class="mb-0">
+                            <li>Highest accuracy and F1-score across all metrics</li>
+                            <li>Robust performance with cross-validation</li>
+                            <li>Provides feature importance rankings for interpretability</li>
+                            <li>Handles non-linear relationships and interactions effectively</li>
+                            <li>Resistant to overfitting through ensemble learning</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">System Architecture</h2>
+
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="architecture-diagram">
+                                <div class="arch-layer">
+                                    <h5 class="text-center mb-3 text-primary">Presentation Layer</h5>
+                                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                                        <span class="badge bg-primary p-2">HTML/CSS/JS</span>
+                                        <span class="badge bg-primary p-2">Bootstrap 5</span>
+                                        <span class="badge bg-primary p-2">Chart.js</span>
+                                        <span class="badge bg-primary p-2">Jinja2</span>
+                                    </div>
+                                </div>
+
+                                <div class="text-center my-3">
+                                    <i class="fas fa-arrow-down fa-2x text-muted"></i>
+                                </div>
+
+                                <div class="arch-layer">
+                                    <h5 class="text-center mb-3 text-success">Application Layer</h5>
+                                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                                        <span class="badge bg-success p-2">Flask Routes</span>
+                                        <span class="badge bg-success p-2">Authentication</span>
+                                        <span class="badge bg-success p-2">Authorization</span>
+                                        <span class="badge bg-success p-2">Form Validation</span>
+                                    </div>
+                                </div>
+
+                                <div class="text-center my-3">
+                                    <i class="fas fa-arrow-down fa-2x text-muted"></i>
+                                </div>
+
+                                <div class="arch-layer">
+                                    <h5 class="text-center mb-3 text-info">Business Logic Layer</h5>
+                                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                                        <span class="badge bg-info p-2">ML Predictor</span>
+                                        <span class="badge bg-info p-2">Alert System</span>
+                                        <span class="badge bg-info p-2">Analytics Engine</span>
+                                        <span class="badge bg-info p-2">Data Processor</span>
+                                    </div>
+                                </div>
+
+                                <div class="text-center my-3">
+                                    <i class="fas fa-arrow-down fa-2x text-muted"></i>
+                                </div>
+
+                                <div class="arch-layer">
+                                    <h5 class="text-center mb-3 text-warning">Data Layer</h5>
+                                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                                        <span class="badge bg-warning p-2">SQLAlchemy ORM</span>
+                                        <span class="badge bg-warning p-2">SQLite Database</span>
+                                        <span class="badge bg-warning p-2">Model Files (.pkl)</span>
+                                    </div>
+                                </div>
+
+                                <div class="text-center my-3">
+                                    <i class="fas fa-arrow-down fa-2x text-muted"></i>
+                                </div>
+
+                                <div class="arch-layer">
+                                    <h5 class="text-center mb-3 text-danger">External Services</h5>
+                                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                                        <span class="badge bg-danger p-2">Email (SMTP)</span>
+                                        <span class="badge bg-danger p-2">SMS (Twilio)</span>
+                                        <span class="badge bg-danger p-2">File Storage</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Features -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Security & Best Practices</h2>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100 border-primary">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-lock me-2"></i>Security Features</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-shield-alt text-success me-2"></i>Password hashing
+                                    with bcrypt</li>
+                                <li class="mb-2"><i class="fas fa-shield-alt text-success me-2"></i>CSRF protection on
+                                    all forms</li>
+                                <li class="mb-2"><i class="fas fa-shield-alt text-success me-2"></i>SQL injection
+                                    prevention (ORM)</li>
+                                <li class="mb-2"><i class="fas fa-shield-alt text-success me-2"></i>Session-based
+                                    authentication</li>
+                                <li class="mb-2"><i class="fas fa-shield-alt text-success me-2"></i>Role-based access
+                                    control</li>
+                                <li class="mb-2"><i class="fas fa-shield-alt text-success me-2"></i>Input validation and
+                                    sanitization</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100 border-success">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="fas fa-code me-2"></i>Development Practices</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Modular folder structure
+                                </li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Blueprint-based routing
+                                </li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Environment variable
+                                    configuration</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Database migrations
+                                    support</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>RESTful API design</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Responsive mobile-first
+                                    UI</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deployment Ready -->
+    <section class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="mb-4">Deployment Ready</h2>
+                    <p class="lead mb-4">Production-ready architecture with scalability in mind</p>
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <div class="p-3 bg-white bg-opacity-10 rounded">
+                                <i class="fas fa-server fa-2x mb-2"></i>
+                                <p class="mb-0 small">WSGI Compatible</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-3 bg-white bg-opacity-10 rounded">
+                                <i class="fas fa-cloud fa-2x mb-2"></i>
+                                <p class="mb-0 small">Cloud Ready</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-3 bg-white bg-opacity-10 rounded">
+                                <i class="fas fa-mobile-alt fa-2x mb-2"></i>
+                                <p class="mb-0 small">Mobile Responsive</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-3 bg-white bg-opacity-10 rounded">
+                                <i class="fas fa-tachometer-alt fa-2x mb-2"></i>
+                                <p class="mb-0 small">Optimized Performance</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="mb-3">Experience the Technology</h2>
+                    <p class="lead text-muted mb-4">See how our advanced stack powers student success</p>
+                    <a href="{{ url_for('auth.login') }}" class="btn btn-primary btn-lg me-2">Try Demo</a>
+                    <a href="{{ url_for('main.about') }}" class="btn btn-outline-primary btn-lg">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    .tech-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .tech-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+    }
+
+    .arch-layer {
+        padding: 1.5rem;
+        background: #f8f9fa;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .architecture-diagram {
+        padding: 2rem 0;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,389 @@
+{% extends "base.html" %}
+
+{% block title %}{{ student.name }} - Student Details{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4 fade-in">
+        <div class="d-flex align-items-center">
+            <a href="{{ url_for('dashboard.teacher') }}" class="btn btn-light me-3 shadow-sm rounded-circle"
+                style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-arrow-left text-muted"></i>
+            </a>
+            <div>
+                <h2 class="mb-1">{{ student.name }}</h2>
+                <p class="text-muted mb-0">Student ID: {{ student.student_id }} • Grade {{ student.grade }} - {{
+                    student.section }}</p>
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-primary shadow-sm" onclick="predictStudent({{ student.id }})">
+                <i class="fas fa-sync me-2"></i>Update Risk Analysis
+            </button>
+        </div>
+    </div>
+
+    <div class="row fade-in" style="animation-delay: 0.1s;">
+        <!-- Left Column: Risk Profile -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        {% if prediction %}
+                        <div class="position-relative d-inline-block">
+                            <canvas id="riskGaugeChart" width="180" height="180"></canvas>
+                            <div class="position-absolute top-50 start-50 translate-middle text-center">
+                                <h3
+                                    class="mb-0 fw-bold {{ 'text-danger' if prediction.risk_level == 'high' else 'text-warning' if prediction.risk_level == 'medium' else 'text-success' }}">
+                                    {{ "%.0f"|format(prediction.risk_score * 100) }}%
+                                </h3>
+                                <small class="text-muted">Risk Score</small>
+                            </div>
+                        </div>
+
+                        <h5 class="mt-4 mb-3">Risk Factors</h5>
+                        <ul class="list-group list-group-flush text-start">
+                            {% if prediction.contributing_factors %}
+                            {% for factor in prediction.contributing_factors %}
+                            <li class="list-group-item px-0 border-0 d-flex align-items-center">
+                                <i class="fas fa-exclamation-circle text-warning me-2"></i>
+                                {{ factor }}
+                            </li>
+                            {% endfor %}
+                            {% else %}
+                            <li class="list-group-item px-0 border-0 text-muted">No significant risk factors identified.
+                            </li>
+                            {% endif %}
+                        </ul>
+                        {% else %}
+                        <div class="text-center py-4">
+                            <i class="fas fa-chart-line fa-3x text-muted mb-3 opacity-25"></i>
+                            <p class="text-muted">No risk prediction available yet.</p>
+                            <button class="btn btn-sm btn-outline-primary" onclick="predictStudent({{ student.id }})">
+                                Run Analysis
+                            </button>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Detailed Data -->
+        <div class="col-md-8 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom-0 pt-4 px-4">
+                    <ul class="nav nav-tabs card-header-tabs" id="studentTabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="attendance-tab" data-bs-toggle="tab" href="#attendance"
+                                role="tab">
+                                <i class="fas fa-calendar-check me-2"></i>Attendance
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="grades-tab" data-bs-toggle="tab" href="#grades" role="tab">
+                                <i class="fas fa-graduation-cap me-2"></i>Grades
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="activities-tab" data-bs-toggle="tab" href="#activities" role="tab">
+                                <i class="fas fa-running me-2"></i>Activities
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="fees-tab" data-bs-toggle="tab" href="#fees" role="tab">
+                                <i class="fas fa-money-bill-wave me-2"></i>Fees
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="counseling-tab" data-bs-toggle="tab" href="#counseling" role="tab">
+                                <i class="fas fa-comments me-2"></i>Counseling
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body p-4">
+                    <div class="tab-content" id="studentTabsContent">
+                        <!-- Attendance Tab -->
+                        <div class="tab-pane fade show active" id="attendance" role="tabpanel">
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-light rounded-3 text-center">
+                                        <h6 class="text-muted text-uppercase small mb-2">Attendance Rate
+                                        </h6>
+                                        <h2
+                                            class="mb-0 fw-bold {{ 'text-danger' if attendance_rate < 75 else 'text-success' }}">
+                                            {{ "%.1f"|format(attendance_rate) }}%
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-light rounded-3 text-center">
+                                        <h6 class="text-muted text-uppercase small mb-2">Total Absences</h6>
+                                        <h2 class="mb-0 fw-bold">{{ attendance_records|selectattr('status',
+                                            'equalto',
+                                            'absent')|list|length }}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="text-uppercase text-muted small fw-bold mb-3">Recent Records</h6>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="bg-light">
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                            <th>Remarks</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for record in attendance_records[:10] %}
+                                        <tr>
+                                            <td>{{ record.date.strftime('%Y-%m-%d') }}</td>
+                                            <td>
+                                                {% if record.status == 'present' %}
+                                                <span class="badge bg-success bg-opacity-10 text-success">Present</span>
+                                                {% elif record.status == 'absent' %}
+                                                <span class="badge bg-danger bg-opacity-10 text-danger">Absent</span>
+                                                {% else %}
+                                                <span class="badge bg-warning bg-opacity-10 text-warning">Late</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-muted small">{{ record.remarks or '-' }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Grades Tab -->
+                        <div class="tab-pane fade" id="grades" role="tabpanel">
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <div class="p-3 bg-light rounded-3 text-center">
+                                        <h6 class="text-muted text-uppercase small mb-2">Avg Assignment</h6>
+                                        <h3 class="mb-0 fw-bold">{{ "%.1f"|format(avg_grades.assignment) }}%
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-3 bg-light rounded-3 text-center">
+                                        <h6 class="text-muted text-uppercase small mb-2">Avg Exam</h6>
+                                        <h3 class="mb-0 fw-bold">{{ "%.1f"|format(avg_grades.exam) }}%</h3>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-3 bg-light rounded-3 text-center">
+                                        <h6 class="text-muted text-uppercase small mb-2">Avg Project</h6>
+                                        <h3 class="mb-0 fw-bold">{{ "%.1f"|format(avg_grades.project) }}%
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="text-uppercase text-muted small fw-bold mb-3">Grade History</h6>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="bg-light">
+                                        <tr>
+                                            <th>Subject</th>
+                                            <th>Type</th>
+                                            <th>Score</th>
+                                            <th>Max Score</th>
+                                            <th>Percentage</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for grade in grades %}
+                                        {% set pct = (grade.score / grade.max_score * 100) if grade.max_score > 0 else 0
+                                        %}
+                                        <tr>
+                                            <td>{{ grade.subject }}</td>
+                                            <td><span class="badge bg-light text-dark border">{{ grade.grade_type|title
+                                                    }}</span></td>
+                                            <td>{{ grade.score }}</td>
+                                            <td>{{ grade.max_score }}</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="progress flex-grow-1 me-2"
+                                                        style="height: 6px; width: 60px;">
+                                                        <div class="progress-bar {% if pct < 50 %}bg-danger{% elif pct < 75 %}bg-warning{% else %}bg-success{% endif %}"
+                                                            role="progressbar" style="width: {{ pct }}%"></div>
+                                                    </div>
+                                                    <span class="small">{{ "%.0f"|format(pct) }}%</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Activities Tab -->
+                        <div class="tab-pane fade" id="activities" role="tabpanel">
+                            {% if activities %}
+                            <div class="row g-3">
+                                {% for activity in activities %}
+                                <div class="col-md-6">
+                                    <div class="p-3 border rounded-3 h-100">
+                                        <div class="d-flex justify-content-between align-items-start mb-2">
+                                            <h6 class="fw-bold mb-0">{{ activity.name }}</h6>
+                                            <span class="badge bg-info bg-opacity-10 text-info">{{ activity.role
+                                                }}</span>
+                                        </div>
+                                        <p class="text-muted small mb-0">{{ activity.description }}</p>
+                                        <div class="mt-2 text-muted small">
+                                            <i class="far fa-clock me-1"></i> {{ activity.hours_per_week }} hrs/week
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            <div class="text-center py-5">
+                                <i class="fas fa-running fa-3x text-muted mb-3 opacity-25"></i>
+                                <p class="text-muted">No extracurricular activities recorded.</p>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Fees Tab -->
+                        <div class="tab-pane fade" id="fees" role="tabpanel">
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-light rounded-3">
+                                        <h6 class="text-muted text-uppercase small mb-2">Total Fees</h6>
+                                        <h3 class="mb-0 fw-bold">${{ fees|sum(attribute='total_fees') }}</h3>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-light rounded-3">
+                                        <h6 class="text-muted text-uppercase small mb-2">Outstanding</h6>
+                                        <h3 class="mb-0 fw-bold text-danger">${{ fees|sum(attribute='total_fees') -
+                                            fees|sum(attribute='paid_amount') }}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="bg-light">
+                                        <tr>
+                                            <th>Due Date</th>
+                                            <th>Amount</th>
+                                            <th>Paid</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for fee in fees %}
+                                        <tr>
+                                            <td>{{ fee.due_date.strftime('%Y-%m-%d') }}</td>
+                                            <td>${{ fee.total_fees }}</td>
+                                            <td>${{ fee.paid_amount }}</td>
+                                            <td>
+                                                {% if fee.outstanding_amount == 0 %}
+                                                <span class="badge bg-success bg-opacity-10 text-success">Paid</span>
+                                                {% elif fee.outstanding_amount < fee.total_fees %} <span
+                                                    class="badge bg-warning bg-opacity-10 text-warning">
+                                                    Partial</span>
+                                                    {% else %}
+                                                    <span
+                                                        class="badge bg-danger bg-opacity-10 text-danger">Pending</span>
+                                                    {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Counseling Tab -->
+                        <div class="tab-pane fade" id="counseling" role="tabpanel">
+                            {% if counseling_notes %}
+                            <div class="timeline">
+                                {% for note in counseling_notes %}
+                                <div
+                                    class="p-3 border rounded-3 mb-3 border-start border-4 {% if note.concern_level == 'high' %}border-danger{% elif note.concern_level == 'medium' %}border-warning{% else %}border-success{% endif %}">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="badge bg-light text-dark border">{{
+                                            note.date.strftime('%Y-%m-%d')
+                                            }}</span>
+                                        <span
+                                            class="badge {% if note.concern_level == 'high' %}bg-danger{% elif note.concern_level == 'medium' %}bg-warning{% else %}bg-success{% endif %}">
+                                            {{ note.concern_level|title }} Concern
+                                        </span>
+                                    </div>
+                                    <p class="mb-0 text-muted">{{ note.note }}</p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            <div class="text-center py-5">
+                                <i class="fas fa-comments fa-3x text-muted mb-3 opacity-25"></i>
+                                <p class="text-muted">No counseling notes recorded.</p>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Risk Gauge Chart
+    document.addEventListener('DOMContentLoaded', function () {
+        {% if prediction %}
+        const ctx = document.getElementById('riskGaugeChart').getContext('2d');
+        const riskScore = {{ prediction.risk_score }
+    };
+    const color = riskScore > 0.6 ? '#e63946' : (riskScore > 0.3 ? '#f72585' : '#4cc9f0');
+
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Risk', 'Safe'],
+            datasets: [{
+                data: [riskScore, 1 - riskScore],
+                backgroundColor: [color, '#e9ecef'],
+                borderWidth: 0,
+                circumference: 360,
+                cutout: '85%'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: { enabled: false }
+            }
+        }
+    });
+    {% endif %}
+    });
+
+    function predictStudent(studentId) {
+        const btn = event.currentTarget;
+        const originalContent = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating...';
+        btn.disabled = true;
+
+        fetch(`/api/predict/${studentId}`)
+            .then(response => response.json())
+            .then(data => {
+                location.reload();
+            })
+            .catch(error => {
+                alert('Error updating prediction');
+                console.error(error);
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+            });
+    }
+</script>
+{% endblock %}

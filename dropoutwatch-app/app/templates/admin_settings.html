@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block title %}System Settings - Admin - DropoutWatch{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="mb-1"><i class="fas fa-sliders-h me-2 text-primary"></i>System Settings</h2>
+                    <p class="text-muted mb-0">Configure system thresholds and notification preferences</p>
+                </div>
+                <a href="{{ url_for('admin.dashboard') }}" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+                </a>
+            </div>
+
+            <form method="POST">
+                <!-- Risk Thresholds -->
+                <div class="card mb-4 shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="fas fa-chart-line me-2"></i>Risk Assessment Thresholds</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Configure the thresholds used to determine student risk levels</p>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="attendance_threshold" class="form-label">
+                                    <i class="fas fa-calendar-check text-primary me-2"></i>Attendance Threshold (%)
+                                </label>
+                                <input type="number" class="form-control" id="attendance_threshold"
+                                    name="attendance_threshold" value="{{ settings.attendance_threshold }}" min="0"
+                                    max="100" step="1">
+                                <div class="form-text">Students below this attendance rate are flagged as at-risk</div>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label for="grade_threshold" class="form-label">
+                                    <i class="fas fa-graduation-cap text-success me-2"></i>Grade Threshold (%)
+                                </label>
+                                <input type="number" class="form-control" id="grade_threshold" name="grade_threshold"
+                                    value="{{ settings.grade_threshold }}" min="0" max="100" step="1">
+                                <div class="form-text">Students below this grade average are flagged as at-risk</div>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label for="fee_threshold_days" class="form-label">
+                                    <i class="fas fa-dollar-sign text-warning me-2"></i>Fee Overdue Threshold (Days)
+                                </label>
+                                <input type="number" class="form-control" id="fee_threshold_days"
+                                    name="fee_threshold_days" value="{{ settings.fee_threshold_days }}" min="0"
+                                    step="1">
+                                <div class="form-text">Days overdue before fees are considered a risk factor</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notification Settings -->
+                <div class="card mb-4 shadow">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0"><i class="fas fa-bell me-2"></i>Notification Settings</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Configure how and when alerts are sent to parents and counselors</p>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="email_enabled"
+                                        name="email_enabled" {% if settings.email_enabled %}checked{% endif %}>
+                                    <label class="form-check-label" for="email_enabled">
+                                        <i class="fas fa-envelope text-primary me-2"></i>Enable Email Notifications
+                                    </label>
+                                </div>
+                                <div class="form-text ms-4">Send email alerts to parents when students are flagged as
+                                    medium or high risk</div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="sms_enabled" name="sms_enabled"
+                                        {% if settings.sms_enabled %}checked{% endif %}>
+                                    <label class="form-check-label" for="sms_enabled">
+                                        <i class="fas fa-sms text-success me-2"></i>Enable SMS Notifications
+                                    </label>
+                                </div>
+                                <div class="form-text ms-4">Send SMS alerts via Twilio (requires Twilio configuration)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info mt-3">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>Note:</strong> Email and SMS credentials must be configured in the .env file for
+                            notifications to work.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ML Model Settings -->
+                <div class="card mb-4 shadow">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="fas fa-brain me-2"></i>Machine Learning Settings</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Configure ML model behavior and prediction settings</p>
+
+                        <div class="alert alert-secondary">
+                            <i class="fas fa-cog me-2"></i>
+                            <strong>Current Model:</strong> Random Forest Classifier (v1.0)
+                            <br>
+                            <small class="text-muted">12 features analyzed | 100 decision trees | Balanced class
+                                weights</small>
+                        </div>
+
+                        <div class="form-text">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            Model retraining and advanced configuration options will be available in a future update.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Save Button -->
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
+                    <a href="{{ url_for('admin.dashboard') }}" class="btn btn-secondary btn-lg">
+                        <i class="fas fa-times me-2"></i>Cancel
+                    </a>
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-save me-2"></i>Save Settings
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

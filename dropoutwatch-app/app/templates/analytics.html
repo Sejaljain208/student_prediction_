@@ -1,0 +1,284 @@
+{% extends "base.html" %}
+
+{% block title %}Analytics & Reports - DropoutWatch{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="mb-1"><i class="fas fa-chart-bar me-2 text-primary"></i>Analytics & Reports</h2>
+            <p class="text-muted mb-0">Comprehensive data visualization and insights</p>
+        </div>
+    </div>
+
+    <!-- Summary Statistics Cards -->
+    <div class="row mb-4" id="summaryStats">
+        <div class="col-md-2 mb-3">
+            <div class="card bg-gradient-primary text-white h-100">
+                <div class="card-body">
+                    <h6 class="text-white-50 text-uppercase small mb-2">Total Students</h6>
+                    <h3 class="mb-0 fw-bold" id="totalStudents">-</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-3">
+            <div class="card bg-gradient-success text-white h-100">
+                <div class="card-body">
+                    <h6 class="text-white-50 text-uppercase small mb-2">Low Risk</h6>
+                    <h3 class="mb-0 fw-bold" id="lowRisk">-</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-3">
+            <div class="card bg-gradient-warning text-white h-100">
+                <div class="card-body">
+                    <h6 class="text-white-50 text-uppercase small mb-2">Medium Risk</h6>
+                    <h3 class="mb-0 fw-bold" id="mediumRisk">-</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-3">
+            <div class="card bg-gradient-danger text-white h-100">
+                <div class="card-body">
+                    <h6 class="text-white-50 text-uppercase small mb-2">High Risk</h6>
+                    <h3 class="mb-0 fw-bold" id="highRisk">-</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-3">
+            <div class="card bg-gradient-info text-white h-100">
+                <div class="card-body">
+                    <h6 class="text-white-50 text-uppercase small mb-2">Avg Attendance</h6>
+                    <h3 class="mb-0 fw-bold" id="avgAttendance">-</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-3">
+            <div class="card bg-gradient-secondary text-white h-100">
+                <div class="card-body">
+                    <h6 class="text-white-50 text-uppercase small mb-2">Avg Grade</h6>
+                    <h3 class="mb-0 fw-bold" id="avgGrade">-</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 1 -->
+    <div class="row mb-4">
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0"><i class="fas fa-pie-chart me-2 text-primary"></i>Risk Distribution</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="riskPieChart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0"><i class="fas fa-chart-bar me-2 text-success"></i>Risk by Grade Level</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="riskByGradeChart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 2 -->
+    <div class="row mb-4">
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0"><i class="fas fa-chart-scatter me-2 text-info"></i>Attendance vs Risk Score</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="attendanceScatterChart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0"><i class="fas fa-list-ol me-2 text-warning"></i>Top Contributing Factors</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="factorsChart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+    // Load summary statistics
+    fetch('/analytics/data/summary-stats')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('totalStudents').textContent = data.total_students;
+            document.getElementById('lowRisk').textContent = data.low_risk;
+            document.getElementById('mediumRisk').textContent = data.medium_risk;
+            document.getElementById('highRisk').textContent = data.high_risk;
+            document.getElementById('avgAttendance').textContent = data.avg_attendance + '%';
+            document.getElementById('avgGrade').textContent = data.avg_grade + '%';
+        });
+
+    // Risk Distribution Pie Chart
+    fetch('/analytics/data/risk-distribution')
+        .then(response => response.json())
+        .then(data => {
+            const ctx = document.getElementById('riskPieChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        data: data.values,
+                        backgroundColor: data.labels.map(label =>
+                            data.colors[label.toLowerCase()]
+                        ),
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        title: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        });
+
+    // Risk by Grade Bar Chart
+    fetch('/analytics/data/risk-by-grade')
+        .then(response => response.json())
+        .then(data => {
+            const ctx = document.getElementById('riskByGradeChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: data.datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            stacked: true
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Students'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        });
+
+    // Attendance vs Risk Scatter Plot
+    fetch('/analytics/data/attendance-vs-risk')
+        .then(response => response.json())
+        .then(data => {
+            const ctx = document.getElementById('attendanceScatterChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: data.datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Attendance Percentage (%)'
+                            },
+                            min: 0,
+                            max: 100
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Risk Score (%)'
+                            },
+                            min: 0,
+                            max: 100
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `Attendance: ${context.parsed.x.toFixed(1)}%, Risk: ${context.parsed.y.toFixed(1)}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+    // Contributing Factors Horizontal Bar Chart
+    fetch('/analytics/data/contributing-factors')
+        .then(response => response.json())
+        .then(data => {
+            const ctx = document.getElementById('factorsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Occurrences',
+                        data: data.values,
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Students Affected'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        });
+</script>
+{% endblock %}

@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+
+{% block title %}About - DropoutWatch{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Hero Section -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold mb-3">About DropoutWatch</h1>
+        <p class="lead text-muted">Using Data and AI to Keep Students on Track</p>
+    </div>
+
+    <!-- Mission Section -->
+    <div class="row mb-5">
+        <div class="col-md-10 offset-md-1">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-5">
+                    <h2 class="text-primary mb-4"><i class="fas fa-bullseye me-2"></i>Our Mission</h2>
+                    <p class="lead">
+                        DropoutWatch is dedicated to helping educational institutions identify and support at-risk
+                        students
+                        before they drop out. By combining centralized student data with advanced machine learning, we
+                        enable
+                        early intervention that saves educational futures.
+                    </p>
+                    <p>
+                        Every student deserves the opportunity to succeed. Our platform empowers educators with
+                        actionable
+                        insights, allowing them to provide targeted support where it's needed most.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works Section -->
+    <div class="row mb-5">
+        <div class="col-md-10 offset-md-1">
+            <h2 class="text-primary mb-4 text-center"><i class="fas fa-cogs me-2"></i>How It Works</h2>
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <div class="text-center">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                            style="width: 80px; height: 80px;">
+                            <i class="fas fa-database fa-2x"></i>
+                        </div>
+                        <h5>1. Data Collection</h5>
+                        <p class="small text-muted">Teachers input attendance, grades, activities, fees, and counseling
+                            notes</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="text-center">
+                        <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                            style="width: 80px; height: 80px;">
+                            <i class="fas fa-calculator fa-2x"></i>
+                        </div>
+                        <h5>2. Feature Extraction</h5>
+                        <p class="small text-muted">System calculates 12 key features per student automatically</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="text-center">
+                        <div class="bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                            style="width: 80px; height: 80px;">
+                            <i class="fas fa-brain fa-2x"></i>
+                        </div>
+                        <h5>3. Risk Prediction</h5>
+                        <p class="small text-muted">Random Forest model classifies students into Low/Medium/High risk
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="text-center">
+                        <div class="bg-warning text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                            style="width: 80px; height: 80px;">
+                            <i class="fas fa-bell fa-2x"></i>
+                        </div>
+                        <h5>4. Alert & Intervene</h5>
+                        <p class="small text-muted">Automated alerts trigger intervention by counselors and teachers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Technology Section -->
+    <div class="row mb-5">
+        <div class="col-md-10 offset-md-1">
+            <div class="card border-0 shadow-sm bg-light">
+                <div class="card-body p-5">
+                    <h2 class="text-primary mb-4"><i class="fas fa-microchip me-2"></i>Technology Stack</h2>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <h5><i class="fas fa-server text-primary me-2"></i>Backend</h5>
+                            <ul>
+                                <li><strong>Flask</strong> - Web framework</li>
+                                <li><strong>SQLAlchemy</strong> - Database ORM</li>
+                                <li><strong>Flask-Login</strong> - Authentication</li>
+                                <li><strong>Flask-Bcrypt</strong> - Password hashing</li>
+                                <li><strong>Flask-Mail</strong> - Email notifications</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <h5><i class="fas fa-laptop-code text-success me-2"></i>Frontend</h5>
+                            <ul>
+                                <li><strong>Bootstrap 5</strong> - UI framework</li>
+                                <li><strong>Chart.js</strong> - Data visualization</li>
+                                <li><strong>Font Awesome</strong> - Icons</li>
+                                <li><strong>Jinja2</strong> - Template engine</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <h5><i class="fas fa-brain text-info me-2"></i>Machine Learning</h5>
+                            <ul>
+                                <li><strong>scikit-learn</strong> - ML algorithms</li>
+                                <li><strong>Random Forest</strong> - Primary classifier</li>
+                                <li><strong>pandas/numpy</strong> - Data processing</li>
+                                <li><strong>12 Features</strong> - Analyzed per student</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <h5><i class="fas fa-cloud text-warning me-2"></i>External Services</h5>
+                            <ul>
+                                <li><strong>Twilio</strong> - SMS notifications (optional)</li>
+                                <li><strong>SMTP</strong> - Email delivery</li>
+                                <li><strong>SQLite/PostgreSQL</strong> - Database</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="row mb-5">
+        <div class="col-md-10 offset-md-1">
+            <h2 class="text-primary mb-4 text-center"><i class="fas fa-star me-2"></i>Key Features</h2>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5><i class="fas fa-chart-line text-primary me-2"></i>ML-Powered Predictions</h5>
+                            <p class="small">Random Forest classifier analyzes 12+ student factors to predict dropout
+                                risk</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5><i class="fas fa-database text-success me-2"></i>Centralized Data</h5>
+                            <p class="small">Attendance, grades, activities, fees, and counseling notes in one place</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5><i class="fas fa-users text-info me-2"></i>Role-Based Access</h5>
+                            <p class="small">Separate dashboards for teachers, parents, counselors, and administrators
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5><i class="fas fa-bell text-warning me-2"></i>Automated Alerts</h5>
+                            <p class="small">Email and SMS notifications for medium/high-risk students</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5><i class="fas fa-chart-pie text-danger me-2"></i>Visual Analytics</h5>
+                            <p class="small">Interactive charts and graphs powered by Chart.js</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5><i class="fas fa-upload text-secondary me-2"></i>Batch Import</h5>
+                            <p class="small">CSV upload for bulk student data import with automatic predictions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Impact Section -->
+    <div class="row mb-5">
+        <div class="col-md-10 offset-md-1">
+            <div class="card border-0 shadow-sm bg-primary text-white">
+                <div class="card-body p-5">
+                    <h2 class="mb-4"><i class="fas fa-trophy me-2"></i>Educational Impact</h2>
+                    <div class="row">
+                        <div class="col-md-4 text-center mb-3">
+                            <h1 class="display-4 fw-bold">2-3</h1>
+                            <p>Months earlier detection of at-risk students</p>
+                        </div>
+                        <div class="col-md-4 text-center mb-3">
+                            <h1 class="display-4 fw-bold">15-25%</h1>
+                            <p>Improvement in retention rates</p>
+                        </div>
+                        <div class="col-md-4 text-center mb-3">
+                            <h1 class="display-4 fw-bold">100%</h1>
+                            <p>Data-driven intervention decisions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- References Section -->
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-5">
+                    <h2 class="text-primary mb-4"><i class="fas fa-book me-2"></i>References & Inspiration</h2>
+                    <ul>
+                        <li>Spokane Public Schools' Early Warning System</li>
+                        <li>UNICEF guidelines on student retention</li>
+                        <li>Educational research on dropout prediction</li>
+                        <li><a href="https://github.com/alessandroryo/student-dropout-prediction"
+                                target="_blank">Student Dropout Prediction ML Project</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

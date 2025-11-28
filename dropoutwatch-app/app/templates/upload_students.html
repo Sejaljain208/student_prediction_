@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Students - DropoutWatch{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-upload"></i> Upload Students (CSV)
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <h5><i class="fas fa-info-circle"></i> Instructions</h5>
+                        <p>Upload a CSV file containing student data. The file must include the following columns:</p>
+                        <ul class="mb-0">
+                            <li><strong>student_id</strong> - Unique student identifier</li>
+                            <li><strong>name</strong> - Student full name</li>
+                            <li><strong>grade</strong> - Grade level (9-12)</li>
+                            <li><strong>section</strong> - Section/Class (A, B, C, etc.)</li>
+                            <li><strong>email</strong> - Student email</li>
+                            <li><strong>phone</strong> - Contact phone number</li>
+                            <li><strong>age</strong> - Student age</li>
+                            <li><strong>gender</strong> - Gender (M/F)</li>
+                            <li><strong>attendance_rate</strong> - Attendance rate (0.0 - 1.0)</li>
+                            <li><strong>gpa</strong> - GPA (0.0 - 4.0)</li>
+                            <li><strong>parent_education</strong> - Parent education level</li>
+                            <li><strong>family_income</strong> - Family income level (Low/Medium/High)</li>
+                            <li><strong>study_hours_per_week</strong> - Weekly study hours</li>
+                            <li><strong>extracurricular_activities</strong> - Number of activities</li>
+                            <li><strong>previous_failures</strong> - Number of previous failures</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-3">
+                        <a href="{{ url_for('static', filename='../sample_students.csv') }}" 
+                           class="btn btn-outline-secondary" download>
+                            <i class="fas fa-download"></i> Download Sample CSV Template
+                        </a>
+                    </div>
+
+                    <form method="POST" enctype="multipart/form-data" id="uploadForm">
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Select CSV File</label>
+                            <input type="file" 
+                                   class="form-control" 
+                                   id="file" 
+                                   name="file" 
+                                   accept=".csv" 
+                                   required>
+                            <div class="form-text">Maximum file size: 10MB</div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{{ url_for('dashboard.teacher') }}" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary" id="uploadBtn">
+                                <i class="fas fa-upload"></i> Upload and Import
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="mt-4" id="uploadProgress" style="display: none;">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                                 role="progressbar" 
+                                 style="width: 100%">
+                                Processing...
+                            </div>
+                        </div>
+                        <p class="text-center mt-2">
+                            <small class="text-muted">
+                                Importing students and generating risk predictions...
+                            </small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-4 shadow-sm">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0"><i class="fas fa-lightbulb"></i> Tips</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="mb-0">
+                        <li>Ensure all required columns are present in your CSV file</li>
+                        <li>Student IDs must be unique - duplicate IDs will be skipped</li>
+                        <li>Attendance rate should be between 0.0 and 1.0 (e.g., 0.85 for 85%)</li>
+                        <li>GPA should be on a 4.0 scale</li>
+                        <li>After upload, risk predictions will be automatically generated</li>
+                        <li>You can download the sample template to see the correct format</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('uploadForm').addEventListener('submit', function() {
+    document.getElementById('uploadBtn').disabled = true;
+    document.getElementById('uploadProgress').style.display = 'block';
+});
+</script>
+{% endblock %}

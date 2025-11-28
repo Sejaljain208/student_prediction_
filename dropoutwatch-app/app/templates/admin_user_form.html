@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}{% if user %}Edit{% else %}Add{% endif %} User - Admin - DropoutWatch{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="mb-1">
+                        <i class="fas fa-user-{% if user %}edit{% else %}plus{% endif %} me-2 text-primary"></i>
+                        {% if user %}Edit User{% else %}Add New User{% endif %}
+                    </h2>
+                    <p class="text-muted mb-0">{% if user %}Update user information{% else %}Create a new system user{%
+                        endif %}</p>
+                </div>
+                <a href="{{ url_for('admin.users') }}" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Users
+                </a>
+            </div>
+
+            <div class="card shadow">
+                <div class="card-body">
+                    <form method="POST">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username *</label>
+                            <input type="text" class="form-control" id="username" name="username"
+                                value="{% if user %}{{ user.username }}{% endif %}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email *</label>
+                            <input type="email" class="form-control" id="email" name="email"
+                                value="{% if user %}{{ user.email }}{% endif %}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="role" class="form-label">Role *</label>
+                            <select class="form-select" id="role" name="role" required>
+                                <option value="">Select a role...</option>
+                                <option value="admin" {% if user and user.role=='admin' %}selected{% endif %}>
+                                    Administrator</option>
+                                <option value="teacher" {% if user and user.role=='teacher' %}selected{% endif %}>
+                                    Teacher</option>
+                                <option value="counselor" {% if user and user.role=='counselor' %}selected{% endif %}>
+                                    Counselor</option>
+                                <option value="parent" {% if user and user.role=='parent' %}selected{% endif %}>Parent
+                                </option>
+                            </select>
+                            <div class="form-text">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Administrators have full system access. Teachers can view all students. Counselors focus
+                                on at-risk students. Parents can only view their children.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">
+                                Password {% if not user %}*{% else %}(leave blank to keep current){% endif %}
+                            </label>
+                            <input type="password" class="form-control" id="password" name="password" {% if not user
+                                %}required{% endif %}>
+                            <div class="form-text">
+                                <i class="fas fa-lock me-1"></i>
+                                Password should be at least 8 characters long
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{{ url_for('admin.users') }}" class="btn btn-secondary">
+                                <i class="fas fa-times me-2"></i>Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>{% if user %}Update{% else %}Create{% endif %} User
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
